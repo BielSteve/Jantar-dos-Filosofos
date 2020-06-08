@@ -36,8 +36,8 @@
             this.label6 = new System.Windows.Forms.Label();
             this.filo1_Comeu = new System.Windows.Forms.Label();
             this.filo1_Tempo = new System.Windows.Forms.Label();
-            this.filo1_fome = new System.Windows.Forms.Label();
-            this.filo1_pensou = new System.Windows.Forms.Label();
+            this.filo1_Fome = new System.Windows.Forms.Label();
+            this.filo1_Pensou = new System.Windows.Forms.Label();
             this.filo1_Status = new System.Windows.Forms.Label();
             this.filo2_Status = new System.Windows.Forms.Label();
             this.filo2_Pensou = new System.Windows.Forms.Label();
@@ -159,23 +159,23 @@
             this.filo1_Tempo.TabIndex = 7;
             this.filo1_Tempo.Text = "0";
             // 
-            // filo1_fome
+            // filo1_Fome
             // 
-            this.filo1_fome.AutoSize = true;
-            this.filo1_fome.Location = new System.Drawing.Point(168, 83);
-            this.filo1_fome.Name = "filo1_fome";
-            this.filo1_fome.Size = new System.Drawing.Size(13, 13);
-            this.filo1_fome.TabIndex = 8;
-            this.filo1_fome.Text = "0";
+            this.filo1_Fome.AutoSize = true;
+            this.filo1_Fome.Location = new System.Drawing.Point(168, 83);
+            this.filo1_Fome.Name = "filo1_Fome";
+            this.filo1_Fome.Size = new System.Drawing.Size(13, 13);
+            this.filo1_Fome.TabIndex = 8;
+            this.filo1_Fome.Text = "0";
             // 
-            // filo1_pensou
+            // filo1_Pensou
             // 
-            this.filo1_pensou.AutoSize = true;
-            this.filo1_pensou.Location = new System.Drawing.Point(168, 58);
-            this.filo1_pensou.Name = "filo1_pensou";
-            this.filo1_pensou.Size = new System.Drawing.Size(13, 13);
-            this.filo1_pensou.TabIndex = 9;
-            this.filo1_pensou.Text = "0";
+            this.filo1_Pensou.AutoSize = true;
+            this.filo1_Pensou.Location = new System.Drawing.Point(168, 58);
+            this.filo1_Pensou.Name = "filo1_Pensou";
+            this.filo1_Pensou.Size = new System.Drawing.Size(13, 13);
+            this.filo1_Pensou.TabIndex = 9;
+            this.filo1_Pensou.Text = "0";
             // 
             // filo1_Status
             // 
@@ -632,8 +632,8 @@
             this.Controls.Add(this.label16);
             this.Controls.Add(this.label17);
             this.Controls.Add(this.filo1_Status);
-            this.Controls.Add(this.filo1_pensou);
-            this.Controls.Add(this.filo1_fome);
+            this.Controls.Add(this.filo1_Pensou);
+            this.Controls.Add(this.filo1_Fome);
             this.Controls.Add(this.filo1_Tempo);
             this.Controls.Add(this.filo1_Comeu);
             this.Controls.Add(this.label6);
@@ -660,8 +660,8 @@
         private System.Windows.Forms.Label label6;
         public System.Windows.Forms.Label filo1_Comeu;
         public System.Windows.Forms.Label filo1_Tempo;
-        public System.Windows.Forms.Label filo1_fome;
-        public System.Windows.Forms.Label filo1_pensou;
+        public System.Windows.Forms.Label filo1_Fome;
+        public System.Windows.Forms.Label filo1_Pensou;
         public System.Windows.Forms.Label filo1_Status;
         public System.Windows.Forms.Label filo2_Status;
         public System.Windows.Forms.Label filo2_Pensou;

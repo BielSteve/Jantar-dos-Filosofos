@@ -14,13 +14,13 @@ namespace BielFilosofos.jantar
         private int index;
         private List<Filosofo> todosFilosofos;
         private int qtdaComeu = 0;
-        private int maxQuePodeComer = 100;
+        private int maxQuePodeComer = 1000;
         public Mao garfoEsquerdo; 
         public Mao garfoDireito;
         private Stopwatch relogio;
-        public Form1 janela;
         private int qtdaPensou = 0;
         private int qtdaFome = 0;
+        public Relatorio relatorio;
         public Filosofo filosofoEsquerda {
             get { 
                 if(this.index == 0)
@@ -49,55 +49,43 @@ namespace BielFilosofos.jantar
         }
 
 
-        public Filosofo(int index, List<Filosofo> todosFilosofos, Form1 janela)
+        public Filosofo(int index, List<Filosofo> todosFilosofos, Relatorio relatorio)
         {
-            this.nome = "Filosofo " + index;
+            this.nome = "Filosofo " + (index + 1);
+
             this.index = index;
             this.todosFilosofos = todosFilosofos;
-            this.janela = janela;
-            
+            this.relatorio = relatorio;
+            this.relatorio.adicionaRelatorio(this.nome + " Comer", 0);
+            this.relatorio.adicionaRelatorio(this.nome + " Fome", 0);
+            this.relatorio.adicionaRelatorio(this.nome + " Pessoa", 0);
+            this.relatorio.adicionaRelatorio(this.nome + " Tempo", 0);
+            this.relatorio.adicionaStatus(this.nome + " Status", " ");
+
         }
-       
+
+
         private bool PegarGarfos()
         {
-            garfoDireito.estaOcupado = true;
-            garfoEsquerdo.estaOcupado = true;
-            if (filosofoDireita.garfoEsquerdo.estaOcupado)
+            if (!filosofoDireita.garfoEsquerdo.estaOcupado)
             {
-                garfoDireito.estaOcupado = false;
-            }
-            if (filosofoEsquerda.garfoDireito.estaOcupado)
-            {
-                garfoEsquerdo.estaOcupado = false;
-            }
-            if(garfoEsquerdo.estaOcupado && garfoDireito.estaOcupado)
-            {
-                return true;
-            }
-            this.AtualizaStatus("Esta com Fome");
-            qtdaFome++;
-            if (this.index == 0)
-            {
-                janela.filo1_fome.Text = qtdaFome + "";
-            }
-            if (this.index == 1)
-            {
-                janela.filo2_Fome.Text = qtdaFome + "";
-            }
-            if (this.index == 2)
-            {
-                janela.filo3_Fome.Text = qtdaFome + "";
-            }
-            if (this.index == 3)
-            {
-                janela.filo4_Fome.Text = qtdaFome + "";
-            }
-            if (this.index == 4)
-            {
-                janela.filo5_Fome.Text = qtdaFome + "";
+                garfoDireito.estaOcupado = true;
+
+                if (!filosofoEsquerda.garfoDireito.estaOcupado)
+                {
+                    garfoEsquerdo.estaOcupado = true;
+                    return true;
+                }
+                else
+                {
+                    garfoDireito.estaOcupado = false;
+                }
             }
 
-            Console.WriteLine(this.nome + " Passou fome");
+            Console.WriteLine("O " + this.nome + " está pasando fome.");
+            this.relatorio.incrementaRelatorio(this.nome + " Fome");
+            this.relatorio.atualizaStatus(this.nome + " Status", "Com Fome");
+
             return false;
 
         }
@@ -106,26 +94,8 @@ namespace BielFilosofos.jantar
            // Thread.Sleep(500);
             this.AtualizaStatus("Esta Comendo");
             qtdaComeu++;
-            if(this.index == 0)
-            {
-                janela.filo1_Comeu.Text = qtdaComeu + "";
-            }
-            if (this.index == 1)
-            {
-                janela.filo2_Comeu.Text = qtdaComeu + "";
-            }
-            if (this.index == 2)
-            {
-                janela.filo3_Comeu.Text = qtdaComeu + "";
-            }
-            if (this.index == 3)
-            {
-                janela.filo4_Comeu.Text = qtdaComeu + "";
-            }
-            if (this.index == 4)
-            {
-                janela.filo5_Comeu.Text = qtdaComeu + "";
-            }
+            this.relatorio.incrementaRelatorio(this.nome + " Comeu");
+            this.relatorio.atualizaStatus(this.nome + " Status", "Esta Comendo");
             Console.WriteLine(this.nome + " Comeu");
             if(this.maxQuePodeComer == qtdaComeu)
             {
@@ -139,27 +109,9 @@ namespace BielFilosofos.jantar
         {
             //Thread.Sleep(500);
             this.AtualizaStatus("Esta Pensando"); 
-            qtdaPensou++; 
-            if (this.index == 0)
-            {
-                janela.filo1_pensou.Text = qtdaPensou + "";
-            }
-            if (this.index == 1)
-            {
-                janela.filo2_Pensou.Text = qtdaPensou + "";
-            }
-            if (this.index == 2)
-            {
-                janela.filo3_Pensou.Text = qtdaPensou + "";
-            }
-            if (this.index == 3)
-            {
-                janela.filo4_Pensou.Text = qtdaPensou + "";
-            }
-            if (this.index == 4)
-            {
-                janela.filo5_Pensou.Text = qtdaPensou + "";
-            }
+            this.relatorio.incrementaRelatorio(this.nome + " Pensou");
+            this.relatorio.atualizaStatus(this.nome + " Status", "Esta Pensando");
+
             Console.WriteLine(this.nome +  " Pensou");
         }
         
@@ -178,65 +130,16 @@ namespace BielFilosofos.jantar
                     this.garfoEsquerdo.estaOcupado = false;
                     
                 }
+                this.relatorio.atualizaRelatorio(this.nome + " Tempo", this.relogio.ElapsedMilliseconds);
                 
-                if (this.index == 0)
-                {
-                    janela.filo1_Tempo.Text = relogio.ElapsedMilliseconds + "";
-                }
-                if (this.index == 1)
-                {
-                    janela.filo2_Tempo.Text = relogio.ElapsedMilliseconds + "";
-
-                }
-                if (this.index == 2)
-                {
-                    janela.filo3_Tempo.Text = relogio.ElapsedMilliseconds + "";
-
-                }
-                if (this.index == 3)
-                {
-                    janela.filo4_Tempo.Text = relogio.ElapsedMilliseconds + "";
-
-                }
-                if (this.index == 4)
-                {
-                    janela.filo5_Tempo.Text = relogio.ElapsedMilliseconds + "";
-
-                }
             }
             this.relogio.Stop();
         }
 
         public void AtualizaStatus(string status)
         {
-            if (this.index == 0)
-            {
-                janela.filo1_Status.Text = status;
-            }
-            if (this.index == 1)
-            {
-                janela.filo2_Status.Text = status;
-
-
-            }
-            if (this.index == 2)
-            {
-                janela.filo3_Status.Text = status;
-
-
-            }
-            if (this.index == 3)
-            {
-                janela.filo4_Status.Text = status;
-
-
-            }
-            if (this.index == 4)
-            {
-                janela.filo5_Status.Text = status;
-
-
-            }
+            
+            
         }
 
     }

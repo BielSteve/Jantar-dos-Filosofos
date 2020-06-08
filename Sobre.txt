@@ -1,0 +1,1 @@
+Tecnologia utilizada para o desenvolvimento desse projeto foi C#, utilizei a IDE Visual Studio para o desenvolvimento.

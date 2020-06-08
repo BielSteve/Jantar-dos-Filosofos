@@ -9,9 +9,9 @@ namespace BielFilosofos.jantar
 {
     class Mesa
     {
-        public Mesa(Form1 janela)
+        public Mesa(Relatorio relatorio)
         {
-            List<Filosofo> filosofos = retornaFilosofo(janela);
+            List<Filosofo> filosofos = retornaFilosofo(relatorio);
             Thread mesaThread = new Thread(new ThreadStart(()=> {
                 //List<Thread> filosofosThread = new List<Thread>();
                 foreach(Filosofo filosofo in filosofos)
@@ -23,11 +23,11 @@ namespace BielFilosofos.jantar
             mesaThread.Start();        
         }
 
-        private List<Filosofo> retornaFilosofo(Form1 janela) {
+        private List<Filosofo> retornaFilosofo(Relatorio relatorio) {
             List<Filosofo> filosofos = new List<Filosofo>(5);
             for(int i=0; i<5; i++)
             {
-                Filosofo filosofo1 = new Filosofo(i, filosofos, janela);
+                Filosofo filosofo1 = new Filosofo(i, filosofos, relatorio);
                 filosofos.Add(filosofo1);
 
             }
